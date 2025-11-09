@@ -206,7 +206,7 @@ You should receive a JSON response, typically containing an authentication token
 |----------|--------|-------------|------------|------|
 | `/api/login` | POST | Login & get JWT | - | ❌ |
 | `/api/import/products` | POST | Upload CSV | `products:import` | ✅ |
-| `/api/import/products/template` | GET | Download import template | `products:view` | ✅ |
+| `/api/import/products/template` | GET | Download import template | `products:import` | ✅ |
 | `/api/import/status/{id}` | GET | Get import job status | `products:view` | ✅ |
 | `/api/import/jobs` | GET | List all import jobs | `products:view` | ✅ |
 | `/api/import/errors` | GET | List all import errors | `products:view` | ✅ |
