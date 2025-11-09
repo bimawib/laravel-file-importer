@@ -21,11 +21,20 @@ class UserSeeder extends Seeder
         $permissions = collect([
             'users:manage',
             'products:import',
-            'products:view'
+            'products:view',
+            'import_jobs:view',
+            'import_errors:view'
         ])->map(fn ($name) => Permission::firstOrCreate(['name' => $name]));
 
         $adminRole->givePermissionTo($permissions);
-        $guestRole->givePermissionTo(Permission::firstOrCreate(['name' => 'products:view']));
+
+        $guestPermissions = Permission::whereIn('name', [
+            'products:view',
+            'import_jobs:view',
+            'import_errors:view'
+        ])->get();
+
+        $guestRole->givePermissionTo($guestPermissions);
 
         $admin = User::firstOrCreate(
             ['email' => 'admin@detik.com'],

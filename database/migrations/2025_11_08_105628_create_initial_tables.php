@@ -31,6 +31,7 @@ return new class extends Migration
         Schema::create('import_jobs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('filename');
+            $table->string('entity_type');
             $table->enum('status', ['pending', 'in_progress', 'completed', 'failed']);
             $table->integer('total')->default(0);
             $table->integer('success')->default(0);
@@ -42,6 +43,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('import_job_id');
             $table->foreign('import_job_id')->references('id')->on('import_jobs')->onDelete('cascade');
+            $table->string('entity_type');
             $table->integer('line_number')->nullable();
             $table->text('raw_data')->nullable();
             $table->text('error_message');
