@@ -1,8 +1,8 @@
-# ⚙️ Laravel Product Importer 
+# 🚀 Laravel File Importer 
 
 ##  **⏺️ Project Overview**
 
-> **Laravel Product Importer** is a backend service built with Laravel 10 that lets users upload product CSV files,  
+> **Laravel File Importer** is a backend service built with Laravel 10 that lets users upload product CSV files,  
 > validates them securely, and processes imports asynchronously using RabbitMQ.  
 > It includes JWT authentication and RBAC authorization for fine-grained access control.
 
