@@ -1,4 +1,6 @@
 *
 !public/
-!templates/
 !.gitignore
+
+!/templates/
+!/templates/**
