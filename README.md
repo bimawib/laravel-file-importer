@@ -35,13 +35,16 @@ It ensures scalability and fault tolerance even for large CSV imports.
 - Endpoint: `/api/import/products`
 - File stored in: `storage/app/imports/products/`
 - New record added to `import_jobs` with status `pending`
+
 **2. Queue processing begins**
 - Laravel dispatches `ProcessProductImportJob` to RabbitMQ
 - Each row in the CSV is sent as a separate `SaveProductRowJob`
+
 **3. Data validation & persistence**
 - ✅ Valid rows → inserted into `products` table  
 - ❌ Invalid rows → logged into `import_errors` table (with details)
- **4. Periodic status check**
+
+**4. Periodic status check**
 - `CheckImportCompletionJob` runs every 1 minute:
   - If `success + failed == total`, mark job as:
     - ✅ `completed` (if any succeeded)
