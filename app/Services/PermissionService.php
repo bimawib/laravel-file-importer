@@ -28,7 +28,7 @@ class PermissionService
                 'current_page' => $permissions->currentPage(),
                 'last_page' => $permissions->lastPage(),
                 'per_page' => $permissions->perPage(),
-                'total' => $permissions->total(),
+                'total' => $permissions->total()
             ],
         ];
     }

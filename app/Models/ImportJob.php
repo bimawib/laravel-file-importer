@@ -24,6 +24,7 @@ class ImportJob extends Model
     protected $keyType = 'string';
     protected $fillable = [
         'filename',
+        'entity_type',
         'status',
         'total',
         'success',
