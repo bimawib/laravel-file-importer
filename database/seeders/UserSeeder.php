@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -14,8 +15,17 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $adminRole = Role::firstOrCreate(['name' => 'admin']);
-        $guestRole = Role::firstOrCreate(['name' => 'guest']);
+        $adminRole = Role::firstOrCreate(['name' => 'Administrator']);
+        $guestRole = Role::firstOrCreate(['name' => 'Guest']);
+
+        $permissions = collect([
+            'users:manage',
+            'products:import',
+            'products:view'
+        ])->map(fn ($name) => Permission::firstOrCreate(['name' => $name]));
+
+        $adminRole->givePermissionTo($permissions);
+        $guestRole->givePermissionTo(Permission::firstOrCreate(['name' => 'products:view']));
 
         $admin = User::firstOrCreate(
             ['email' => 'admin@detik.com'],

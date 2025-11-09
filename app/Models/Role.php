@@ -10,6 +10,8 @@ class Role extends SpatieRole
 {
     use HasFactory;
 
+    public $guard_name = 'api';
+
     public $incrementing = false;
     protected $keyType = 'string';
     protected $guarded = [];
