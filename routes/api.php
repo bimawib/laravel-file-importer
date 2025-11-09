@@ -3,7 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ImportErrorController;
+use App\Http\Controllers\ImportJobController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 
@@ -24,7 +27,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware(['jwt'])->group(function () {
     Route::get('/login-information', [AuthController::class, 'userInfo']);
     Route::post('/logout', [AuthController::class, 'logout']);
-}); 
+});
 
 Route::middleware(['jwt', 'permission:users:manage'])->prefix('admin')->group(function () {
     Route::get('/permissions', [PermissionController::class, 'listPermissions']);
@@ -37,4 +40,15 @@ Route::middleware(['jwt', 'permission:users:manage'])->prefix('admin')->group(fu
 
     Route::post('/roles/assign', [RoleController::class, 'assignRoleToUser']);
     Route::get('/users', [UserController::class, 'listUsers']);
+});
+
+Route::middleware(['jwt'])->group(function () {
+    Route::post('/import/products', [ProductController::class, 'importProducts'])->middleware('permission:products:import');
+    Route::get('/import/products/template', [ProductController::class, 'downloadTemplate'])->middleware('permission:products:import');
+    
+    Route::get('/import/status/{importJob}', [ImportJobController::class, 'getImportJobStatus'])->middleware('permission:import_jobs:view');
+    Route::get('/import/jobs', [ImportJobController::class, 'listImportJobs'])->middleware('permission:import_jobs:view');
+    Route::get('/import/errors', [ImportErrorController::class, 'listImportErrors'])->middleware('permission:import_errors:view');
+
+    Route::get('/products', [ProductController::class, 'listProducts'])->middleware('permission:products:view');
 });
