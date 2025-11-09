@@ -24,6 +24,7 @@ class ImportError extends Model
     protected $keyType = 'string';
     protected $fillable = [
         'import_job_id',
+        'entity_type',
         'line_number',
         'raw_data',
         'error_message'
