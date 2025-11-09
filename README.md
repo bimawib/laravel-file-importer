@@ -113,7 +113,7 @@ docker run -d --name rabbitmq-local --hostname rabbitmq-local \
 ### 💾 **2️⃣ Clone and Install Dependencies**
 ```
 # clone the repository to your local machine
-git clone https://github.com/yourname/laravel-file-importer.git
+git clone https://github.com/bimawib/laravel-file-importer.git
 
 # change directory to already cloned repo
 cd laravel-file-importer
