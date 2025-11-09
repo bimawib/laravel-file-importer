@@ -15,6 +15,7 @@ class ApiResponse
         return response()->json([
             'status' => $status,
             'message' => $message,
+            'errors' => null,
             'data' => $data,
             'pagination' => $pagination
         ], $status);
@@ -23,12 +24,14 @@ class ApiResponse
     public static function error(
         string $message = 'Something went wrong',
         int $status = 500,
-        mixed $data = null
+        mixed $errors = null
     ): JsonResponse {
         return response()->json([
             'status' => $status,
             'message' => $message,
-            'data' => $data
+            'errors' => $errors,
+            'data' => null,
+            'pagination' => null
         ], $status);
     }
 }
